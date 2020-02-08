@@ -1,0 +1,7 @@
+*.vscode/
+.pytest*
+*/*.pyc
+*/__pycache__
+*$py.class
+/instance
+venv/*

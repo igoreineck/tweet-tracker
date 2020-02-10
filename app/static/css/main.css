@@ -1,3 +1,6 @@
+@import "form.css";
+@import "message-list.css";
+
 body {
-  background-color: red;
+  min-height: 100%;
 }

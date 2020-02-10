@@ -1,5 +1,10 @@
-
-class Config():
+class Config(object):
     DEBUG = False
+    TESTING= False
+
+class DevelopmentConfig(Config):
+    DEBUG = True
     TESTING = True
-    EXPLAIN_TEMPLATE_LOADING = True
+
+class TestingConfig(Config):
+    TESTING = True

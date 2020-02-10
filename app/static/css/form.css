@@ -1,0 +1,10 @@
+.search-form {
+  background-color: 1px solid #000;
+  width: 100%;
+  padding: 10px;
+}
+
+.search-form .form-inline .form-control {
+  width: 100%;
+  margin-right: 10px;
+}

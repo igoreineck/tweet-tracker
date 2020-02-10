@@ -1,0 +1,18 @@
+.tweet-box {
+  border: 1px solid #000;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.tweet-box .image-area {
+  margin-right: 10px;
+}
+
+.tweet-box .image-area img {
+  border-radius: 50%;
+}
+
+.tweet-box .tweet-area .user-info p {
+  margin: 0;
+}

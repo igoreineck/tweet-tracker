@@ -10,6 +10,7 @@ def create_app():
         instance_relative_config=False,
         static_folder='static',
     )
+
     app.config.from_object('config.DevelopmentConfig')
     app.register_blueprint(home)
     app.register_blueprint(messages)

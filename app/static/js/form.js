@@ -32,8 +32,8 @@ const createTweetElement = (content) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
-    let paramValue = e.target.elements['hashtag'].value
-    fetchData = createRequestObject(url, { 'hashtag': paramValue })
+    let paramValue = e.target.elements['hashtags'].value
+    fetchData = createRequestObject(url, { 'hashtags': paramValue })
 
     fetch(fetchData)
         .then(response => response.json())

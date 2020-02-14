@@ -1,8 +1,9 @@
 from flask import Flask
 from .views.index import home
-from .views.messages import messages
+from .views.hashtags import save, retrieve
 import tweepy
 
+_ROUTES = [home, save, retrieve]
 
 def create_app():
     app = Flask(
@@ -19,6 +20,6 @@ def app_settings(app):
     return app
 
 def register_blueprints(app):
-    app.register_blueprint(home)
-    app.register_blueprint(messages)
+    for route in _ROUTES:
+        app.register_blueprint(route)
     return app

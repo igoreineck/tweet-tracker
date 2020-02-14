@@ -3,10 +3,12 @@ import redis
 
 class RedisService(object):
 
-    _connection = redis.Redis(
+    _connection = redis.StrictRedis(
         host=os.getenv('REDIS_HOST'),
         port=os.getenv('REDIS_PORT'),
-        db=os.getenv('REDIS_DB')
+        db=os.getenv('REDIS_DB'),
+        charset='utf-8',
+        decode_responses=True
     )
 
     @classmethod

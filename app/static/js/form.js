@@ -1,4 +1,4 @@
-const url = `${location.origin}/messages`
+const url = `${location.origin}/save`
 
 const form = document.querySelector('.search-form')
 const tweetList = document.querySelector('.message-list')

@@ -1,12 +1,13 @@
 from flask import Flask
 from .views.index import home
-from .views.hashtags import hashtag_save, hashtag_retrieve
+from .views.hashtags import hashtag_save, hashtag_retrieve, hashtag_remove
 from .views.messages import message_retrieve
 import tweepy
 
 _ROUTES = [
     home,
     hashtag_save,
+    hashtag_remove,
     hashtag_retrieve,
     message_retrieve,
 ]

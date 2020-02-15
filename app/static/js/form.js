@@ -1,48 +1,44 @@
-const url = `${location.origin}/save`
+'use strict'
+
+import { hashtagSaveUrl, hashtagRetrieveUrl } from './routes.js'
+import {
+    createPostRequest,
+    createTweetElement,
+    createHashtagElement,
+    cleanElementList
+} from './helpers.js'
 
 const form = document.querySelector('.search-form')
+const hashtagList = document.querySelector('.hashtag-list')
 const tweetList = document.querySelector('.message-list')
 
-const createRequestObject = (url, data) => {
-    return new Request(url, {
-        method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify(data),
-        mode: 'cors',
-        cache: 'default'
-    })
-}
 
-const createTweetElement = (content) => {
-    return `<div class="tweet-box">
-        <div class="image-area">
-            <img src="${content.user_profile_image}" class="img-responsive" />
-        </div>
-        <div class="tweet-area">
-            <div class="user-info">
-                <p><strong>${content.user_name}</strong> <span class="text-muted">@ ${content.user_screen_name} - ${content.created_at}</span></p>
-            </div>
-            <div class="user-message">
-                <p class="tweet-user-message">${content.message}</p>
-            </div>
-        </div>
-    </div>`
-}
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-
-    let paramValue = e.target.elements['hashtags'].value
-    fetchData = createRequestObject(url, { 'hashtags': paramValue })
-
-    fetch(fetchData)
+function retriveHashtags() {
+    fetch(hashtagRetrieveUrl)
         .then(response => response.json())
         .then(content => {
-            const data = content.data
-            data.forEach(function (el, index) {
-                let tweet = createTweetElement(el)
-                tweetList.insertAdjacentHTML('beforeend', tweet)
+            cleanElementList(hashtagList)
+            content.data.forEach(el => {
+                let hashtag = createHashtagElement(el)
+                hashtagList.insertAdjacentHTML('beforeend', hashtag)
             })
         })
         .catch(err => console.log(err))
+}
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+
+    let values = e.target.elements['hashtags'].value
+    let requestParams = createPostRequest(hashtagSaveUrl, {
+        'hashtags': values
+    })
+
+    fetch(requestParams)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+
+    retriveHashtags()
 })
+
+retriveHashtags()

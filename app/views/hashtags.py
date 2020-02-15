@@ -1,4 +1,3 @@
-from app.constants.redis import RedisConstants
 from app.services.redis import RedisService
 from flask import Blueprint, render_template, jsonify, request
 
@@ -20,7 +19,7 @@ hashtag_remove = Blueprint(
 
 
 @hashtag_save.route('/hashtag/save', methods=['POST'])
-def receive():
+def save():
     redis = RedisService()
     data = request.get_json()
     hashtags = data.get('hashtags')
@@ -28,7 +27,7 @@ def receive():
         redis.enqueue(str(hashtag))
     return jsonify(success=True)
 
-@hashtag_retrieve.route('/hashtag/retrieve', methods=['GET'])
+@hashtag_retrieve.route('/hashtag/retrieve')
 def retrieve():
     redis = RedisService()
     hashtags = redis.get_queue

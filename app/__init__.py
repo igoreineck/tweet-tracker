@@ -12,18 +12,14 @@ _ROUTES = [
     message_retrieve,
 ]
 
-def create_app():
+def create_app(config):
     app = Flask(
         __name__,
         instance_relative_config=False,
         static_folder='static',
     )
-    app_settings(app)
+    app.config.from_object(config)
     register_blueprints(app)
-    return app
-
-def app_settings(app):
-    app.config.from_object('config.DevelopmentConfig')
     return app
 
 def register_blueprints(app):

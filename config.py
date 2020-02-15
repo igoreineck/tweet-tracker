@@ -3,8 +3,10 @@ class Config(object):
     TESTING= False
 
 class DevelopmentConfig(Config):
+    ENV = 'dev'
     DEBUG = True
-    TESTING = True
 
 class TestingConfig(Config):
+    ENV = 'testing'
     TESTING = True
+    DEBUG = True

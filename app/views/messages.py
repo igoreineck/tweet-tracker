@@ -1,4 +1,3 @@
-from app.constants.redis import RedisConstants
 from app.services.redis import RedisService
 from app.services.twitter import TwitterService
 from flask import Blueprint, jsonify, request

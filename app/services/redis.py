@@ -22,12 +22,12 @@ class RedisService(object):
 
     @property
     def get_queue(self):
-        return self._session.lrange(RedisConstants.HASHTAGS.value,
+        return self._session.lrange(RedisConstants.LISTNAME.value,
             self._QUEUE_START_POSITION, self._QUEUE_END_POSITION)
 
     def enqueue(self, value: str):
-        self._session.rpush(RedisConstants.HASHTAGS.value, value)
+        self._session.rpush(RedisConstants.LISTNAME.value, value)
 
     def dequeue(self, value: str):
-        return self._session.lrem(RedisConstants.HASHTAGS.value,
+        return self._session.lrem(RedisConstants.LISTNAME.value,
             self._QUEUE_INDEX_AMOUNT, value)

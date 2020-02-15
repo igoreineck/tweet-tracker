@@ -25,17 +25,25 @@ def receive():
     data = request.get_json()
     hashtags = data.get('hashtags')
     for hashtag in hashtags.split():
-        redis.queue(hashtag)
+        redis.enqueue(str(hashtag))
     return jsonify(success=True)
 
 @hashtag_retrieve.route('/hashtag/retrieve', methods=['GET'])
 def retrieve():
     redis = RedisService()
-    hashtags = redis.queue
+    hashtags = redis.get_queue
     return jsonify(success=True, data=hashtags)
 
 @hashtag_remove.route('/hashtag/remove', methods=['POST'])
 def remove():
     data = request.get_json()
     hashtag = data.get('hashtag')
-    return jsonify(success=True)
+
+    redis = RedisService()
+    status = redis.dequeue(str(hashtag))
+
+    success = False
+    if status:
+        success = True
+
+    return jsonify(success=success)

@@ -32,7 +32,7 @@ def retrieve():
     service.authenticate()
     api = service.search()
 
-    hashtags = redis.queue
+    hashtags = redis.get_queue
     joined = join_params(hashtags)
     parsed = prepare_params(joined)
     query = encode_query(parsed)

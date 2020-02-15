@@ -3,15 +3,12 @@
 import { hashtagSaveUrl, hashtagRetrieveUrl } from './routes.js'
 import {
     createPostRequest,
-    createTweetElement,
     createHashtagElement,
     cleanElementList
 } from './helpers.js'
 
 const form = document.querySelector('.search-form')
 const hashtagList = document.querySelector('.hashtag-list')
-const tweetList = document.querySelector('.message-list')
-
 
 function retriveHashtags() {
     fetch(hashtagRetrieveUrl)

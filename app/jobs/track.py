@@ -58,7 +58,7 @@ def encode_query(query: str):
 #     })
 
 
-class TrackTweets(object):
+# class TrackTweets(object):
 
-    _REDIS = RedisService()
+#     _REDIS = RedisService()
 

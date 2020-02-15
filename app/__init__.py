@@ -1,9 +1,15 @@
 from flask import Flask
 from .views.index import home
-from .views.hashtags import save, retrieve
+from .views.hashtags import hashtag_save, hashtag_retrieve
+from .views.messages import message_retrieve
 import tweepy
 
-_ROUTES = [home, save, retrieve]
+_ROUTES = [
+    home,
+    hashtag_save,
+    hashtag_retrieve,
+    message_retrieve,
+]
 
 def create_app():
     app = Flask(

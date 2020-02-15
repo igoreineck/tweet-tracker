@@ -1,5 +1,6 @@
 from app.constants.redis import RedisConstants
 from app.services.redis import RedisService
+from app.services.twitter import TwitterService
 from flask import Blueprint, jsonify, request
 from urllib import parse
 import os
@@ -13,20 +14,6 @@ message_retrieve = Blueprint(
     template_folder='templates'
 )
 
-service = tweepy.OAuthHandler(
-    os.getenv('CONSUMER_KEY'),
-    os.getenv('CONSUMER_KEY_SECRET')
-)
-service.set_access_token(
-    os.getenv('ACCESS_TOKEN'),
-    os.getenv('ACCESS_TOKEN_SECRET')
-)
-
-api = tweepy.API(service)
-
-redis = RedisService()
-session = redis.connect()
-
 def join_params(params: list):
     return ' '.join(params)
 
@@ -36,11 +23,16 @@ def prepare_params(params: str):
 def encode_query(query: str):
     return parse.quote(query)
 
+
 @message_retrieve.route('/message/retrieve', methods=['GET'])
 def retrieve():
-    _ITEMS = 15
+    redis = RedisService()
+    service = TwitterService()
 
-    hashtags = session.lrange(RedisConstants.HASHTAGS.value, 0, -1)
+    service.authenticate()
+    api = service.search()
+
+    hashtags = redis.queue
     joined = join_params(hashtags)
     parsed = prepare_params(joined)
     query = encode_query(parsed)
@@ -49,29 +41,29 @@ def retrieve():
     success = False
     reason = ''
 
-    try:
-        tweepy_call = tweepy.Cursor(
-            api.search,
-            q=query,
-            lang='pt',
-            tweet_mode='extended'
-        ).items(_ITEMS)
+    if (bool(hashtags)):
+        try:
+            tweepy_call = service.cursor(api, q=query, lang='pt',
+                tweet_mode='extended')
 
+            for result in tweepy_call:
+                item = result._json
+                results.append({
+                    'created_at': item['created_at'],
+                    'message': item['full_text'],
+                    'user_name': item['user']['name'],
+                    'user_screen_name': item['user']['screen_name'],
+                    'user_profile_image': item['user']['profile_image_url_https']
+                })
+            success = True
+        except tweepy.error.TweepError:
+            reason = "It was not possible stabilish a connection"
+        except Exception as exc:
+            import traceback
+            traceback.print_exc()
+            reason = exc
+    else:
         success = True
-    except tweepy.error.TempError:
-        reason = "It was not possible to stabilish a connection"
-    except Exception as exc:
-        import traceback
-        traceback.print_exc()
-        reason = exc
+        reason = 'No hashtags to search'
 
-    for result in tweepy_call:
-        item = result._json
-        results.append({
-            'created_at': item['created_at'],
-            'message': item['full_text'],
-            'user_name': item['user']['name'],
-            'user_screen_name': item['user']['screen_name'],
-            'user_profile_image': item['user']['profile_image_url_https']
-        })
-    return jsonify(success=True, data=results)
+    return jsonify(success=success, reason=reason, data=results)

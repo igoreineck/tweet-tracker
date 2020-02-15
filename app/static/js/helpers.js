@@ -1,5 +1,7 @@
 'use strict'
 
+export const hashtagList = document.querySelector('.hashtag-list')
+
 export const createPostRequest = (url, data) => {
     return new Request(url, {
         method: 'POST',
@@ -34,4 +36,6 @@ export const createTweetElement = content => {
     </div>`
 }
 
-export const createHashtagElement = content => `<div>${content} <span>X</span></div>`
+export const createHashtagElement = content => (
+    `<button type="button" class="hashtag" value="${content}">${content} <span>X</span></button>`
+)

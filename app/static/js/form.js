@@ -4,11 +4,27 @@ import { hashtagSaveUrl, hashtagRetrieveUrl } from './routes.js'
 import {
     createPostRequest,
     createHashtagElement,
-    cleanElementList
+    cleanElementList,
+    hashtagList
 } from './helpers.js'
 
 const form = document.querySelector('.search-form')
-const hashtagList = document.querySelector('.hashtag-list')
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+
+    let values = e.target.elements['hashtags'].value
+    let requestParams = createPostRequest(hashtagSaveUrl, {
+        'hashtags': values
+    })
+    fetch(requestParams)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+
+    retriveHashtags()
+})
+
+retriveHashtags()
 
 function retriveHashtags() {
     fetch(hashtagRetrieveUrl)
@@ -22,20 +38,3 @@ function retriveHashtags() {
         })
         .catch(err => console.log(err))
 }
-
-form.addEventListener('submit', e => {
-    e.preventDefault()
-
-    let values = e.target.elements['hashtags'].value
-    let requestParams = createPostRequest(hashtagSaveUrl, {
-        'hashtags': values
-    })
-
-    fetch(requestParams)
-        .then(response => response.json())
-        .catch(err => console.log(err))
-
-    retriveHashtags()
-})
-
-retriveHashtags()

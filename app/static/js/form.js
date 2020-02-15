@@ -1,11 +1,9 @@
 'use strict'
 
-import { hashtagSaveUrl, hashtagRetrieveUrl } from './routes.js'
+import { hashtagSaveUrl } from './routes.js'
 import {
     createPostRequest,
-    createHashtagElement,
-    cleanElementList,
-    hashtagList
+    retriveHashtags
 } from './helpers.js'
 
 const form = document.querySelector('.search-form')
@@ -19,22 +17,8 @@ form.addEventListener('submit', e => {
     })
     fetch(requestParams)
         .then(response => response.json())
+        .then(() => retriveHashtags())
         .catch(err => console.log(err))
-
-    retriveHashtags()
 })
 
 retriveHashtags()
-
-function retriveHashtags() {
-    fetch(hashtagRetrieveUrl)
-        .then(response => response.json())
-        .then(content => {
-            cleanElementList(hashtagList)
-            content.data.forEach(el => {
-                let hashtag = createHashtagElement(el)
-                hashtagList.insertAdjacentHTML('beforeend', hashtag)
-            })
-        })
-        .catch(err => console.log(err))
-}

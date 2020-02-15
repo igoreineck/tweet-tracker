@@ -1,5 +1,7 @@
 'use strict'
 
+import { hashtagRetrieveUrl } from './routes.js'
+
 export const hashtagList = document.querySelector('.hashtag-list')
 
 export const createPostRequest = (url, data) => {
@@ -9,6 +11,19 @@ export const createPostRequest = (url, data) => {
         body: JSON.stringify(data),
         mode: 'cors'
     })
+}
+
+export const retriveHashtags = () => {
+    fetch(hashtagRetrieveUrl)
+        .then(response => response.json())
+        .then(content => {
+            cleanElementList(hashtagList)
+            content.data.forEach(el => {
+                let hashtag = createHashtagElement(el)
+                hashtagList.insertAdjacentHTML('beforeend', hashtag)
+            })
+        })
+        .catch(err => console.log(err))
 }
 
 export function cleanElementList(list) {

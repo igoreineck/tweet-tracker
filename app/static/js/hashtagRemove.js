@@ -1,9 +1,7 @@
 'use strict'
 
 import { hashtagRemoveUrl } from './routes.js'
-import { createPostRequest } from './helpers.js'
-
-const renderedHashtagList = document.querySelector('.hashtag-list')
+import { createPostRequest, retriveHashtags, hashtagList } from './helpers.js'
 
 function listenChildren(e) {
     if (e.target !== e.currentTarget) {
@@ -14,9 +12,9 @@ function listenChildren(e) {
         })
         fetch(requestParams)
             .then(response => response.json())
-            .then(content => console.log(content))
+            .then(() => retriveHashtags())
             .catch(err => console.log(err))
     }
 }
 
-renderedHashtagList.addEventListener('click', listenChildren, false)
+hashtagList.addEventListener('click', listenChildren, false)

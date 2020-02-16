@@ -36,21 +36,24 @@ export function cleanElementList(list) {
 }
 
 export const createTweetElement = content => {
-    return `<div class="tweet-box">
+    return `<article class="tweet-box">
         <div class="image-area">
             <img src="${content.user_profile_image}" class="img-responsive" />
         </div>
         <div class="tweet-area">
             <div class="user-info">
-                <p><strong>${content.user_name}</strong> <span class="text-muted">@ ${content.user_screen_name} - ${content.created_at}</span></p>
+                <p><strong>${content.user_name}</strong> <span class="text-muted">@${content.user_screen_name} - ${content.created_at}</span></p>
             </div>
             <div class="user-message">
                 <p class="tweet-user-message">${content.message}</p>
             </div>
         </div>
-    </div>`
+    </article>`
 }
 
 export const createHashtagElement = content => (
-    `<button type="button" class="hashtag" value="${content}">${content} <span>X</span></button>`
+    `<div class="hashtag-component">
+        <button type="button" class="badge badge-danger hashtag" value="${content}"><span>x</span></button>
+        <div class="component">${content}</div>
+    </div>`
 )

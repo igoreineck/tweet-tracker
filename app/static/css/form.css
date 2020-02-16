@@ -1,10 +1,22 @@
+@import "variables.css";
+
 .search-form {
-  background-color: 1px solid #000;
+  background-color: 1px solid var(--black);
   width: 100%;
-  padding: 10px;
+  padding: var(--default-padding);
 }
 
-.search-form .form-inline .form-control {
+.search-form .input-group {
   width: 100%;
-  margin-right: 10px;
+}
+
+.search-form .input-group .form-control {
+  border-radius: 25px 0 0 25px;
+}
+
+.search-form .input-group .btn {
+  border-radius: 0 25px 25px 0;
+  background-color: var(--deep-koamaru);
+  border-color: var(--deep-koamaru);
+  padding: 0 30px;
 }

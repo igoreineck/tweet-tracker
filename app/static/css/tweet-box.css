@@ -1,8 +1,9 @@
 .tweet-box {
-  border: 1px solid #000;
+  background-color: var(--white);
+  border: 1px solid lightgray;
   display: flex;
   align-items: flex-start;
-  padding: 10px;
+  padding: var(--default-padding);
 }
 
 .tweet-box .image-area {
@@ -14,5 +15,9 @@
 }
 
 .tweet-box .tweet-area .user-info p {
+  margin: 0;
+}
+
+.tweet-user-message {
   margin: 0;
 }

@@ -2,6 +2,8 @@ from app.services.redis import RedisService
 from app.services.twitter import TwitterService
 from flask import Blueprint, jsonify, request
 from urllib import parse
+from datetime import datetime
+import dateutil.parser
 import os
 import requests
 import tweepy
@@ -47,8 +49,9 @@ def retrieve():
 
             for result in tweepy_call:
                 item = result._json
+                created_at = dateutil.parser.parse(item['created_at'])
                 results.append({
-                    'created_at': item['created_at'],
+                    'created_at': datetime.strftime(created_at, '%Y-%m-%d %H:%M:%S'),
                     'message': item['full_text'],
                     'user_name': item['user']['name'],
                     'user_screen_name': item['user']['screen_name'],

@@ -1,0 +1,33 @@
+@import "variables.css";
+
+.hashtag-list {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  align-items: flex-start;
+  -webkit-align-items: flex-start;
+  padding: var(--default-padding);
+}
+
+.hashtag-list .hashtag-component {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.hashtag-list .component {
+  background-color: var(--white);
+  border: 1px solid var(--light-steel-blue);
+  border-radius: 25px;
+  color: var(--light-steel-blue);
+  font-weight: bolder;
+  padding: 5px 10px;
+}
+
+.hashtag-list .hashtag {
+  border: 0;
+  border-radius: 25px;
+  margin-right: 5px;
+}

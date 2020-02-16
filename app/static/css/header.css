@@ -1,0 +1,8 @@
+@import "variables.css";
+
+.header {
+  background-color: var(--yankees-blue);
+  color: var(--white);
+  font-weight: bolder;
+  padding: var(--default-padding);
+}

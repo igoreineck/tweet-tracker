@@ -4,7 +4,7 @@ import { messageRetrieveUrl } from './routes.js'
 import { createTweetElement, cleanElementList } from './helpers.js'
 
 const tweetList = document.querySelector('.message-list')
-const interval = 30000
+const interval = 20000
 
 const sync = () => {
     fetch(messageRetrieveUrl)

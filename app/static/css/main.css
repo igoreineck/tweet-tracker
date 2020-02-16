@@ -1,6 +1,10 @@
+@import "header.css";
 @import "form.css";
 @import "message-list.css";
+@import "hashtag-list.css";
+@import "tweet-box.css";
 
 body {
+  background-color: var(--not-fully-white);
   min-height: 100%;
 }

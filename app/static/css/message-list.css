@@ -1,5 +1,7 @@
-@import "tweet-box.css";
-
 .message-list {
-  margin: 20px 0;
+  padding: var(--default-padding);
+}
+
+.message-list .tweet-box:not(:last-child) {
+  border-bottom: none;
 }

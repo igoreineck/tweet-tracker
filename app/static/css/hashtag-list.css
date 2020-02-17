@@ -19,9 +19,9 @@
 
 .hashtag-list .component {
   background-color: var(--white);
-  border: 1px solid var(--light-steel-blue);
+  border: 1px solid var(--black);
   border-radius: 25px;
-  color: var(--light-steel-blue);
+  color: var(--black);
   font-weight: bolder;
   padding: 5px 10px;
 }

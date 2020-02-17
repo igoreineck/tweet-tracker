@@ -2,8 +2,9 @@
 
 .search-form {
   background-color: 1px solid var(--black);
-  width: 100%;
+  margin: 0 0 30px 0;
   padding: var(--default-padding);
+  width: 100%;
 }
 
 .search-form .input-group {
@@ -16,7 +17,9 @@
 
 .search-form .input-group .btn {
   border-radius: 0 25px 25px 0;
-  background-color: var(--deep-koamaru);
-  border-color: var(--deep-koamaru);
+  background-color: var(--white);
+  border-color: var(--yankees-blue);
+  color: var(--yankees-blue);
+  font-weight: bolder;
   padding: 0 30px;
 }

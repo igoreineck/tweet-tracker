@@ -1,9 +1,9 @@
 :root {
   --white: #fff;
   --not-fully-white: #fdfeff;
-  --black: #000;
-  --yankees-blue: #22223b;
+  --black: #333;
+  --yankees-blue: rgb(29, 161, 242);
   --light-steel-blue: #afc3d7;
-  --deep-koamaru: #2c3a62;
+  --deep-koamaru: rgb(230, 236, 240);
   --default-padding: 15px;
 }

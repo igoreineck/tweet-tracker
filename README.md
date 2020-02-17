@@ -16,6 +16,8 @@ If you are using some Linux distro, you can check opened ports putting in your t
 
 > sudo lsof -i -P -n | grep LISTEN
 
+Python 3.7 is a requirement to run some dependencies, don't use other versions.
+
 ## Installation
 
 After download this repository you must to install dependencies. Don't forget to create your virtual environment and tap:
@@ -31,10 +33,10 @@ Don't forget to save Redis information into the .env too. The variables are: RED
 
 After all, try to run "flask run". And everything should works.
 
+# OBS:
+
+The time between every twitter request it was fixed with 20 seconds.
+
 ## Author
 
 👤 **Igor Eineck**
-
----
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

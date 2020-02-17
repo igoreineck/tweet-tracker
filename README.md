@@ -33,7 +33,7 @@ Don't forget to save Redis information into the .env too. The variables are: RED
 
 After all, try to run "flask run". And everything should works.
 
-# OBS:
+## OBS:
 
 The time between every twitter request it was fixed with 20 seconds.
 

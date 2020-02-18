@@ -15,13 +15,15 @@ message_retrieve = Blueprint(
     template_folder='templates'
 )
 
-def join_params(params: list):
+def join_params(params):
+    if isinstance(params, bytes):
+        return ' '.join(params.decode('utf-8'))
     return ' '.join(params)
 
-def prepare_params(params: str):
+def prepare_params(params):
     return params.replace(' ', ' OR ')
 
-def encode_query(query: str):
+def encode_query(query):
     return parse.quote(query)
 
 

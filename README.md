@@ -6,6 +6,8 @@
 
 > A simple application used to track tweets based on inputs given by user
 
+The application can be accessed at (https://tweet-message-tracker.herokuapp.com/)
+
 ## Settings
 
 To run this application, make sure that you already have Redis installed on your system.

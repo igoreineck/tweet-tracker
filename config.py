@@ -10,3 +10,6 @@ class TestingConfig(Config):
     FLASK_ENV = 'testing'
     TESTING = True
     DEBUG = True
+
+class ProductionConfig(Config):
+    FLASK_ENV = 'production'

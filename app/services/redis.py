@@ -18,6 +18,9 @@ class RedisService(object):
         self._session = self._connect()
 
     def _connect(self):
+        heroku_redis_connection = os.environ.get('REDIS_URL')
+        if heroku_redis_connection:
+            return self._connection.from_url(heroku_redis_connection)
         return self._connection
 
     @property

@@ -6,9 +6,9 @@ import redis
 class RedisService(object):
     def __init__(self):
         self._connection = redis.Redis(
-            host=os.getenv('REDIS_HOST'),
-            port=os.getenv('REDIS_PORT'),
-            db=os.getenv('REDIS_DB'),
+            host=os.getenv('REDIS_HOST') or 'localhost',
+            port=os.getenv('REDIS_PORT') or 6379,
+            db=os.getenv('REDIS_DB') or 0,
             charset='utf-8',
             decode_responses=True
         )

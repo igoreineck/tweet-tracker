@@ -5,13 +5,11 @@ import redis
 
 class RedisService(object):
     def __init__(self):
-        self._connection = redis.Redis(
-            host=os.getenv('REDIS_HOST') or 'localhost',
-            port=os.getenv('REDIS_PORT') or 6379,
-            db=os.getenv('REDIS_DB') or 0,
-            charset='utf-8',
-            decode_responses=True
-        )
+        self._host = os.getenv('REDIS_HOST') or 'localhost'
+        self._port = os.getenv('REDIS_PORT') or 6379
+        self._db = os.getenv('REDIS_DB') or 0
+        self._charset = 'utf-8'
+        self._decode_responses = True
         self._QUEUE_START_POSITION = 0
         self._QUEUE_END_POSITION = -1
         self._QUEUE_INDEX_AMOUNT = 1
@@ -20,8 +18,13 @@ class RedisService(object):
     def _connect(self):
         heroku_redis_connection = os.environ.get('REDIS_URL')
         if heroku_redis_connection:
-            return self._connection.from_url(heroku_redis_connection)
-        return self._connection
+            return redis.from_url(
+                heroku_redis_connection,
+                charset=self._charset,
+                decode_responses=self._decode_responses
+            )
+        return redis.Redis(host=self._host, port=self._port, db=self._db,
+            charset=self._charset, decode_responses=self._decode_responses)
 
     @property
     def get_queue(self):
